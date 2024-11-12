@@ -4,6 +4,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
 import { PORT } from './config';
+import router from './controllers';
 
 const app = express();
 app.use(compression());
@@ -16,7 +17,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use('/api/express-pilot', checkContentType, registerRoutes());
+app.use('/api', router);
 
 /**
  * 404 Route
