@@ -12,6 +12,7 @@ export const fetchMoviesByYear = async (
     const page = (request.query.page as string) || '1';
 
     if (isNaN(+year)) {
+      // If year is not valid, give 400 error
       response.status(400).json({ error: 'Invalid year provided' });
       return;
     }
