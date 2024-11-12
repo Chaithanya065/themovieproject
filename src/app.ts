@@ -1,9 +1,7 @@
-import 'dotenv/config';
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
-import { PORT } from './config';
 import router from './controllers';
 
 const app = express();
@@ -29,6 +27,4 @@ app.use('/', (_: Request, response: Response) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`The server has started successfully on port: ${PORT}`);
-});
+export default app;

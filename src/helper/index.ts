@@ -1,11 +1,30 @@
-export const formatDate = (dateString?: string) => {
+export const formatDate = (dateString: string) => {
   if (!dateString) {
-    return '';
+    return;
   }
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(date);
+
+  const [year, month, day] = dateString.split('-');
+
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  const monthName = monthNames[parseInt(month, 10) - 1];
+
+  if (!monthName) {
+    return;
+  }
+
+  return `${monthName} ${parseInt(day, 10)}, ${year}`;
 };

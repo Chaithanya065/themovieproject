@@ -25,9 +25,7 @@ export const fetchMoviesByYear = async (
 
     // Fetch credits in parallel
     const creditsRequests = movieResults.map((movie: TMDBMovieResult) =>
-      TMDBClient.get(`/movie/${movie.id}/credits?language=en-US`).catch(
-        (error) => null
-      )
+      TMDBClient.get(`/movie/${movie.id}/credits?language=en-US`)
     );
 
     const creditsResponses = await Promise.allSettled(creditsRequests);
@@ -36,7 +34,7 @@ export const fetchMoviesByYear = async (
     const editorsByMovieId = new Map();
     creditsResponses.forEach((result, index) => {
       if (result.status === 'fulfilled' && result.value) {
-        const crew = result.value.data.crew || [];
+        const crew = result.value.data?.crew || [];
         const editors = crew
           .filter((member: any) => member.known_for_department === 'Editing')
           .map((editor: any) => editor.name);
